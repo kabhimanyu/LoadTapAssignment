@@ -21,5 +21,19 @@ This code was written for the interview assignment for LoadTap. The code is writ
 	yarn dev
 
 ## Modules used
-
+### IMAP
 We are using IMAP to monitor the email client . Imap connects to the mail server and pulls mail for a specified period. However google does not let unsecured apps to connect with email and password and we have to generate the xoauth2 token to connect to the mail client.
+
+For gmail we need to follow the follwing steps
+	- Create a new Project on Google Developer portal
+	- Enable Gmail API
+	- Create the credentials for the project and copy paste the clientID and clientSecret.
+	- Go to [https://developers.google.com/oauthplayground/] (https://developers.google.com/oauthplayground/) and generate a refresh token. 
+	- Replace these values in your .env file. 
+
+### SMTP
+We are using Simple Mail Transfer Protocol to send the email to the destination email. 
+
+The main entry point of the app is Commander. Commander is the controlling unit of the app and it waits for different events. MailClient is responsible for monitoring the email and it emits an event as soon as it recieves an email with a xml file attached.
+Commander sends the mail to the MailParser to parse the email and convert it to csv.
+The csv file is then sent to the destination email by SMTPClient.
