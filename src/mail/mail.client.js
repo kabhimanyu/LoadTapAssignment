@@ -51,14 +51,14 @@ class MailClient{
         Logger.info(`Checking Mail Box ${this.mailBox}`)
         this.checkMail();
       }
-    },50000);
+    },4000);
   }
   checkMail(){
     this.openInbox((error, box)=> {
       if(error){
         console.log(error);
       }
-      this.imap.search(['ALL',['SINCE','28 JUNE, 2019']],(err,results)=>{
+      this.imap.search(['ALL',['SINCE','3 JULY, 2019']],(err,results)=>{
         if(error) {
           Logger.error(error)
         }else {
